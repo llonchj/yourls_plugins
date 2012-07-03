@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Query String Forward
-Plugin URI: https://github.com/llonchj/yourls_plugins
+Plugin URI: https://github.com/llonchj/yourls_plugins   
 Description: Pushes the Short URL Query String into the Destination URL
 Version: 1.0
 Author: Jordi Llonch
@@ -21,9 +21,8 @@ function qs_forward_redirect($url, $code) {
     $a = array_merge($query, $url_query);
     $parsed_url["query"] = http_build_query($a);
     $new_url = $parsed_url["scheme"]."://".$parsed_url["host"].$parsed_url["path"];
-    if (is_set($parsed_url["query"]))
-        $new_url += "?".$parsed_url["query"];
-
+    if (isset($parsed_url["query"])) 
+        $new_url = "$new_url?".$parsed_url["query"];
     return $new_url;
 }
 
