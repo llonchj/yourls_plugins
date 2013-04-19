@@ -20,7 +20,12 @@ function qs_forward_redirect($url, $code) {
     
     $a = array_merge($query, $url_query);
     $parsed_url["query"] = http_build_query($a);
-    $new_url = $parsed_url["scheme"]."://".$parsed_url["host"].$parsed_url["path"];
+
+    $new_url = $parsed_url["scheme"]."://".$parsed_url["host"];
+    if (isset($parsed_url["port"]) && $parsed_url["port"] != "")
+       $new_url = $new_url.":".$parsed_url["port"];
+    $new_url = $new_url.$parsed_url["path"];
+    
     if (isset($parsed_url["query"]) && /* fix by XL-Network. Thank you!*/$parsed_url["query"] != "")
         $new_url = "$new_url?".$parsed_url["query"];
     return $new_url;
