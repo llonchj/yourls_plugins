@@ -9,10 +9,10 @@ Author URI: https://github.com/llonchj
 */
 
 // Hook our custom function into the 'pre_redirect' event
-yourls_add_filter('redirect', 'qs_forward_redirect' );
+yourls_add_filter('redirect_location', 'qs_forward_redirect' );
 
 // Our custom function that will be triggered when the event occurs
-function qs_forward_redirect($url, $code) {
+function qs_forward_redirect($url) {
     $parsed_url = parse_url($url);
 
     parse_str($_SERVER['QUERY_STRING'], $query);
